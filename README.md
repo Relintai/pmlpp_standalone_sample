@@ -1,23 +1,21 @@
 # PMLPP Sample Project
 
-Sample project / testbed for the https://github.com/Relintai/pmlpp pandemonium engine module.
+Sample project / testbed for the https://github.com/Relintai/pmlpp pandemonium engine module / standalone library.
 
 ## Opening the project
 
-Compile the engine itself, and then open the project inside the `game` folder.
-
-After the initial import it might need an editor restart, however everything should work after that.
+Compile the project, then run `./pmlpp/bin/<your executable>`
 
 ## Compiling
 
 First make sure, that you have everything installed to be able to compile the engine. 
-See the [official docs](https://github.com/Relintai/pandemonium_engine_docs/tree/master/development/compiling) or the [official Godot docs](https://docs.godotengine.org/en/3.4/development/compiling/index.html) for more info.
+See https://github.com/Relintai/pandemonium_engine_docs/tree/master/05_engine_development/01_compiling
 
 My setup/compile script uses the same tools, so you don't need to install anything else.
 
 Now let's clone this repository:
 
-``` git clone https://github.com/Relintai/pmlpp_standalone_sample ```
+``` git clone <repository_url> ```
 
 cd into the new folder:
 
@@ -41,6 +39,18 @@ To build the project on linux with 4 threads run the following command:
 
 ``` scons bl -j4 ```
 
+You can also add `c` to get `compile_commands.json`:
+
+``` scons blc -j4 ```
+
+You can use `_strip` to get an executable without debug information.
+
+``` scons blc_strip -j4 ```
+
+Windows:
+
+``` scons bwc_strip -j4 ```
+
 I call this feature of the setup script build words. [See](#build-words).
 
 Once the build finishes you can find the editor executable inside the `./pmlpp/bin/` folder.
@@ -52,7 +62,37 @@ Alternatively if you don't want to use build words, you can also just go into th
 
 ``` cd pmlpp ```
 
-And compile godot as per the [official docs](https://docs.godotengine.org/en/latest/development/compiling/index.html).
+And compile godot as per https://github.com/Relintai/pandemonium_engine_docs/tree/master/05_engine_development/01_compiling
+
+#### Compile tl;dr
+
+##### On windows:
+
+``` git clone <repository_url> ```
+
+``` cd pmlpp_standalone_sample ```
+
+``` scons ```
+
+``` scons bwc -j4 ```
+
+And after you have your compile_commands.json for clangd's auto completion:
+
+``` scons bw -j4 ```
+
+##### On Linux:
+
+``` git clone <repository_url> ```
+
+``` cd pmlpp_standalone_sample ```
+
+``` scons ```
+
+``` scons blc -j4 ```
+
+And after you have your compile_commands.json for clangd's auto completion:
+
+``` scons bl -j4 ```
 
 ### Build words
 
