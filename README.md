@@ -8,6 +8,41 @@ Compile the project, then run `./pmlpp/bin/<your executable>`
 
 ## Compiling
 
+### Compile tl;dr
+
+First make sure, that you have everything installed to be able to compile the engine. 
+See https://github.com/Relintai/pandemonium_engine_docs/tree/master/05_engine_development/01_compiling
+
+#### On windows:
+
+``` git clone <repository_url> ```
+
+``` cd pmlpp_standalone_sample ```
+
+``` scons ```
+
+``` scons bwc -j4 ```
+
+And after you have your compile_commands.json for clangd's auto completion:
+
+``` scons bw -j4 ```
+
+#### On Linux:
+
+``` git clone <repository_url> ```
+
+``` cd pmlpp_standalone_sample ```
+
+``` scons ```
+
+``` scons blc -j4 ```
+
+And after you have your compile_commands.json for clangd's auto completion:
+
+``` scons bl -j4 ```
+
+### Compile (long version)
+
 First make sure, that you have everything installed to be able to compile the engine. 
 See https://github.com/Relintai/pandemonium_engine_docs/tree/master/05_engine_development/01_compiling
 
@@ -64,37 +99,8 @@ Alternatively if you don't want to use build words, you can also just go into th
 
 And compile godot as per https://github.com/Relintai/pandemonium_engine_docs/tree/master/05_engine_development/01_compiling
 
-#### Compile tl;dr
 
-##### On windows:
-
-``` git clone <repository_url> ```
-
-``` cd pmlpp_standalone_sample ```
-
-``` scons ```
-
-``` scons bwc -j4 ```
-
-And after you have your compile_commands.json for clangd's auto completion:
-
-``` scons bw -j4 ```
-
-##### On Linux:
-
-``` git clone <repository_url> ```
-
-``` cd pmlpp_standalone_sample ```
-
-``` scons ```
-
-``` scons blc -j4 ```
-
-And after you have your compile_commands.json for clangd's auto completion:
-
-``` scons bl -j4 ```
-
-### Build words
+#### Build words
 
 The project's setup script contains support for "build words". These can be used from the root of this project.
 
@@ -106,7 +112,7 @@ The first argument must start with b (build), then it needs to be followed by a 
 
 The rest of the arguments will be passed directly to godot's scons script.
 
-#### Platform abbreviations
+##### Platform abbreviations
 
 `l`: linux \
 `w`: windows \
@@ -115,7 +121,7 @@ The rest of the arguments will be passed directly to godot's scons script.
 `i`: iphone (Not yet finished, use `build_ios.sh`, and `build_ios_release.sh`) \
 Mac OSX: Not yet finished, use `build_osx.sh`
 
-#### Target abbreviations
+##### Target abbreviations
 
 By default the system builds in release_debug.
 
@@ -129,12 +135,12 @@ build editor windows debug
 
 build windows release (this will build the windows release export template)
 
-#### Other
+##### Other
 
 Append `v` to pass the `vsproj=yes` parameter to the build script. This will generate Visual Studio project files.\
 Append `c` to pass the `compiledb=yes` parameter to the build script. This is a new feature in 3.x to have this disabled by default to lessen compile times.
 
-#### Postfixes
+##### Postfixes
 
 There are a few postfixes for the build words. These are more complex options. You have to append them to your build word with an underscore.
 
@@ -144,13 +150,13 @@ For example:
 
 ``` scons bl_slim_latomic -j4 ```
 
-##### slim
+###### slim
 
 With this postfix you can build a slimmed down version of the engine. This disables quite a few unneeded modules.
 
 ``` scons bel_slim -j4 ```
 
-##### latomic
+###### latomic
 
 If you get linker errors while building the game/editor about undefined referenced with atomic related functions you can use this postfix.
 It will add the ` -latomic ` command line switch to the linker flags.
@@ -159,13 +165,13 @@ I ran into this issue while building on a raspberry pi 4 with the x11 platform. 
 
 ``` scons bl_latomic -j4 ```
 
-##### strip
+###### strip
 
 Appends `debug_symbols=no` to the build command, which will strip the resulting binary from debug symbols.
 
 ``` scons bl_strip -j4 ```
 
-#### Scons cache, and sdk locations
+##### Scons cache, and sdk locations
 
 In order to use scons cache and to tell the build system where some of the required sdks are located you usually 
 have to use environment variables. Most of the time you might just want to add them globally, 
@@ -177,7 +183,7 @@ In order to solve this a build config file was added.
 If you want to use the config simply rename the provided `build.config.example` to `build.config`, and customize 
 the settings inside.
 
-### Manual Setup
+#### Manual Setup
 
 If you you don't want to use the setup script (or just want to know what it actually does), 
 this section will explain how to set everything up manually.
